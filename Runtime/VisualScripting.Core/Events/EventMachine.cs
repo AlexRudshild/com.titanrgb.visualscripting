@@ -56,6 +56,8 @@ namespace Unity.VisualScripting
         {
             base.OnEnable();
 
+            SetAllUpdateActive(true);
+
             TriggerEvent(EventHooks.OnEnable);
         }
 
@@ -71,21 +73,6 @@ namespace Unity.VisualScripting
             TriggerEvent(EventHooks.OnEnable);
         }
 
-        protected virtual void Update()
-        {
-            TriggerEvent(EventHooks.Update);
-        }
-
-        protected virtual void FixedUpdate()
-        {
-            TriggerEvent(EventHooks.FixedUpdate);
-        }
-
-        protected virtual void LateUpdate()
-        {
-            TriggerEvent(EventHooks.LateUpdate);
-        }
-
         protected override void OnUninstantiateWhileEnabled()
         {
             TriggerEvent(EventHooks.OnDisable);
@@ -96,6 +83,8 @@ namespace Unity.VisualScripting
         protected override void OnDisable()
         {
             TriggerEvent(EventHooks.OnDisable);
+
+            SetAllUpdateActive(false);
 
             base.OnDisable();
         }
@@ -110,6 +99,16 @@ namespace Unity.VisualScripting
             {
                 base.OnDestroy();
             }
+        }
+
+        private void SetAllUpdateActive(bool active)
+        {
+            if (TryGetComponent(out UnityOnUpdateListener updateListener))
+                updateListener.enabled = active;
+            if (TryGetComponent(out UnityOnLateUpdateListener lateUpdateListener))
+                lateUpdateListener.enabled = active;
+            if (TryGetComponent(out UnityOnFixedUpdateListener fixedUpdateListener))
+                fixedUpdateListener.enabled = active;
         }
 
 #if MODULE_ANIMATION_EXISTS

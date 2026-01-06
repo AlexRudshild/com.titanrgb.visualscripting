@@ -126,6 +126,11 @@ namespace Unity.VisualScripting
 
         public void StartListening(GraphStack stack)
         {
+            if (UnityThread.allowsAPI)
+            {
+                MessageListener.AddTo(typeof(UnityOnUpdateListener), stack.gameObject);
+            }
+
             var data = stack.GetElementData<Data>(this);
 
             if (data.isListening)
@@ -134,7 +139,7 @@ namespace Unity.VisualScripting
             }
 
             var reference = stack.ToReference();
-            var hook = new EventHook(EventHooks.Update, stack.machine);
+            var hook = new EventHook(EventHooks.Update, stack.gameObject);
             Action<EmptyEventArgs> update = args => TriggerUpdate(reference);
             EventBus.Register(hook, update);
             data.update = update;
@@ -150,7 +155,7 @@ namespace Unity.VisualScripting
                 return;
             }
 
-            var hook = new EventHook(EventHooks.Update, stack.machine);
+            var hook = new EventHook(EventHooks.Update, stack.gameObject);
             EventBus.Unregister(hook, data.update);
 
             stack.ClearReference();

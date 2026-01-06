@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Unity.VisualScripting
@@ -6,8 +7,10 @@ namespace Unity.VisualScripting
     /// A configurable event to handle global mouse input.
     /// </summary>
     [UnitCategory("Events/Input")]
-    public sealed class OnMouseInput : MachineEventUnit<EmptyEventArgs>, IMouseEventUnit
+    public sealed class OnMouseInput : SelfEventUnit<EmptyEventArgs>, IMouseEventUnit
     {
+        public override Type MessageListenerType => typeof(UnityOnUpdateListener);
+
         protected override string hookName => EventHooks.Update;
 
         /// <summary>

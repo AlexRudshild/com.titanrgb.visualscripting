@@ -1,3 +1,5 @@
+using System;
+
 namespace Unity.VisualScripting
 {
     /// <summary>
@@ -6,8 +8,10 @@ namespace Unity.VisualScripting
     [UnitCategory("Events/Lifecycle")]
     [UnitOrder(3)]
     [UnitTitle("On Update")]
-    public sealed class Update : MachineEventUnit<EmptyEventArgs>
+    public sealed class Update : SelfEventUnit<EmptyEventArgs>
     {
+        public override Type MessageListenerType => typeof(UnityOnUpdateListener);
+
         protected override string hookName => EventHooks.Update;
     }
 }

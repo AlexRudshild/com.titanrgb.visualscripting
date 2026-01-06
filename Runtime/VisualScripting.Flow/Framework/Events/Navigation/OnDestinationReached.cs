@@ -1,3 +1,4 @@
+using System;
 using UnityEngine.AI;
 
 namespace Unity.VisualScripting
@@ -7,8 +8,10 @@ namespace Unity.VisualScripting
     /// Called when the nav mesh agent comes within a certain threshold of its destination.
     /// </summary>
     [UnitCategory("Events/Navigation")]
-    public sealed class OnDestinationReached : MachineEventUnit<EmptyEventArgs>
+    public sealed class OnDestinationReached : SelfEventUnit<EmptyEventArgs>
     {
+        public override Type MessageListenerType => typeof(UnityOnUpdateListener);
+
         protected override string hookName => EventHooks.Update;
 
         /// <summary>

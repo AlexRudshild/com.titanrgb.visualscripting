@@ -8,8 +8,10 @@ namespace Unity.VisualScripting
     /// </summary>
     [UnitCategory("Events/Time")]
     [Obsolete("Use Wait For Seconds or Timer instead.")]
-    public sealed class OnTimerElapsed : MachineEventUnit<EmptyEventArgs>
+    public sealed class OnTimerElapsed : SelfEventUnit<EmptyEventArgs>
     {
+        public override Type MessageListenerType => typeof(UnityOnUpdateListener);
+
         public new class Data : EventUnit<EmptyEventArgs>.Data
         {
             public float time;

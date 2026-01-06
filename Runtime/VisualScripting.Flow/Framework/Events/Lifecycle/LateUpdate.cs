@@ -1,3 +1,5 @@
+using System;
+
 namespace Unity.VisualScripting
 {
     /// <summary>
@@ -6,8 +8,10 @@ namespace Unity.VisualScripting
     [UnitCategory("Events/Lifecycle")]
     [UnitOrder(5)]
     [UnitTitle("On Late Update")]
-    public sealed class LateUpdate : MachineEventUnit<EmptyEventArgs>
+    public sealed class LateUpdate : SelfEventUnit<EmptyEventArgs>
     {
+        public override Type MessageListenerType => typeof(UnityOnLateUpdateListener);
+
         protected override string hookName => EventHooks.LateUpdate;
     }
 }
