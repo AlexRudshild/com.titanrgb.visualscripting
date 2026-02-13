@@ -1,7 +1,9 @@
 {
     "name": "Unity.VisualScripting.Core",
     "references": [
-        "Unity.InputSystem"
+        "Unity.InputSystem",
+        "MessagePack",
+        "MessagePack.Unity"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [],

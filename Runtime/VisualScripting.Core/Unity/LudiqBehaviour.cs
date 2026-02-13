@@ -16,7 +16,6 @@ namespace Unity.VisualScripting
             }
 
             Serialization.isUnitySerializing = true;
-
             try
             {
                 OnBeforeSerialize();

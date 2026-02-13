@@ -1,14 +1,18 @@
+using MessagePack;
 using System;
 
 namespace Unity.VisualScripting
 {
-    public sealed class ValueInputDefinition : ValuePortDefinition, IUnitInputPortDefinition
+    [MessagePackObject]
+    public sealed partial class ValueInputDefinition : ValuePortDefinition, IUnitInputPortDefinition
     {
         [SerializeAs(nameof(defaultValue))]
+        [Key(1)]
         private object _defaultvalue;
 
         [Inspectable]
         [DoNotSerialize]
+        [IgnoreMember]
         public override Type type
         {
             get
@@ -36,10 +40,12 @@ namespace Unity.VisualScripting
 
         [Serialize]
         [Inspectable]
+        [Key(2)]
         public bool hasDefaultValue { get; set; }
 
         [DoNotSerialize]
         [Inspectable]
+        [IgnoreMember]
         public object defaultValue
         {
             get

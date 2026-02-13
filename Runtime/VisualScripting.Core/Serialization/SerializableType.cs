@@ -1,12 +1,15 @@
+using MessagePack;
 using System;
 
 namespace Unity.VisualScripting
 {
     [Serializable]
     [SerializationVersion("A")]
+    [MessagePackObject]
     public struct SerializableType : IEquatable<SerializableType>, IComparable<SerializableType>
     {
         [Serialize]
+        [Key(0)]
         public string Identification;
 
         public SerializableType(string identification)

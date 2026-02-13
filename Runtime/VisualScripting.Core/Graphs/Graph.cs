@@ -1,3 +1,4 @@
+using MessagePack;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -5,7 +6,7 @@ using UnityEngine;
 
 namespace Unity.VisualScripting
 {
-    public abstract class Graph : IGraph
+    public abstract partial class Graph : IGraph
     {
         protected Graph()
         {
@@ -48,6 +49,8 @@ namespace Unity.VisualScripting
 
         [SerializeAs(nameof(elements))]
         private List<IGraphElement> _elements = new List<IGraphElement>();
+
+        public List<IGraphElement> RawElements { get { return _elements; } set { _elements = value; } }
 
         [DoNotSerialize]
         public MergedGraphElementCollection elements { get; }

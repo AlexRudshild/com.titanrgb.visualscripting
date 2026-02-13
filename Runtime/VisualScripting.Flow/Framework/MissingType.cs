@@ -13,10 +13,13 @@ namespace Unity.VisualScripting
     public sealed class MissingType : Unit
     {
         [Serialize]
-        public string formerType { get; private set; } // Private set is required by the deserializer.
+        public string formerType { get; set; } // Private set is required by the deserializer.
 
         [Serialize]
-        public string formerValue { get; private set; }
+        public string formerValue { get; set; }
+
+        [Serialize]
+        public byte[] formerByteVaule { get; set; }
 
         // Although this unit will have no ports, the already existing graph
         // connections will create invalid ones to connect themselves to.

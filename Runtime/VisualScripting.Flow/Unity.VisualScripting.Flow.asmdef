@@ -2,7 +2,8 @@
     "name": "Unity.VisualScripting.Flow",
     "references": [
         "Unity.VisualScripting.Core",
-        "Unity.InputSystem"
+        "Unity.InputSystem",
+        "MessagePack.Unity"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

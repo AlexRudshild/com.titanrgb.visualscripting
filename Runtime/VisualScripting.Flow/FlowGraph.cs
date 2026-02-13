@@ -8,7 +8,7 @@ namespace Unity.VisualScripting
 {
     [SerializationVersion("A")]
     [DisplayName("Script Graph")]
-    public sealed class FlowGraph : Graph, IGraphWithVariables, IGraphEventListener
+    public sealed partial class FlowGraph : Graph, IGraphWithVariables, IGraphEventListener
     {
         public FlowGraph()
         {
@@ -67,7 +67,7 @@ namespace Unity.VisualScripting
         #region Variables
 
         [Serialize]
-        public VariableDeclarations variables { get; private set; }
+        public VariableDeclarations variables { get; set; }
 
         public IEnumerable<string> GetDynamicVariableNames(VariableKind kind, GraphReference reference)
         {

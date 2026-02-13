@@ -1,3 +1,4 @@
+using MessagePack;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -5,17 +6,28 @@ using System.Collections.Generic;
 namespace Unity.VisualScripting
 {
     [SerializationVersion("A")]
+    [MessagePackObject]
     public sealed class VariableDeclarations : IEnumerable<VariableDeclaration>, ISpecifiesCloner
     {
+        public VariableDeclarations(VariableKind variableKind, VariableDeclarationCollection variableDeclarations)
+        {
+            Kind = variableKind;
+            collection = variableDeclarations;
+        }
+
         public VariableDeclarations()
         {
             collection = new VariableDeclarationCollection();
         }
 
+        [Key(0)]
         public VariableKind Kind;
 
         [Serialize, InspectorWide(true)]
         private VariableDeclarationCollection collection;
+        
+        [IgnoreMember]
+        public VariableDeclarationCollection Collection => collection;
 
         internal Action OnVariableChanged;
 

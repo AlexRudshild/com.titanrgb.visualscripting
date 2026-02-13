@@ -6,7 +6,7 @@ namespace Unity.VisualScripting
     [UnitTitle("Break Loop")]
     [UnitCategory("Control")]
     [UnitOrder(13)]
-    public class Break : Unit
+    public partial class Break : Unit
     {
         /// <summary>
         /// The entry point for the break.
